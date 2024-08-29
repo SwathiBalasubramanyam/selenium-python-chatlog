@@ -8,14 +8,21 @@ from webdriver_manager.chrome import ChromeDriverManager
 SUPPORTED_BROWSERS = ["chrome", "firefox", "edge"]
 DEFAULT_WAIT_TIME = 2
 DEFAULT_BROWSER = "chrome"
-BASE_URL = "https://chatlog.onrender.com/"
+
+import sys
+import os
+
+# Add the root of the project to PYTHONPATH
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default=DEFAULT_BROWSER)
     parser.addoption("--wait_time", action="store", default=DEFAULT_WAIT_TIME)
 
+
 @pytest.fixture(scope="session")
-def setup(pytestconfig):
+def driver(pytestconfig):
     chrome_options = ChromeOptions()
     chrome_options.add_argument("start-maximized")
 
@@ -23,6 +30,3 @@ def setup(pytestconfig):
     driver.implicitly_wait(pytestconfig.getoption('wait_time'))
     yield driver
     driver.quit()
-
-
-

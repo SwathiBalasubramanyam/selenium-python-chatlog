@@ -1,4 +1,5 @@
 selenium-python-chatlog-venv
 __pycache__
 *.pytest_cache
+.idea
 

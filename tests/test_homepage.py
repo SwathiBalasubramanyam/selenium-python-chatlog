@@ -1,3 +1,7 @@
+from pages.homepage import HomePage
+
 
 def test_01_homepage(driver):
-    driver.get("https://chatlog.onrender.com/")
+    page = HomePage(driver)
+    page.open()
+    page.verify()
